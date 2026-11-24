@@ -439,7 +439,7 @@
     if (!Ctx) { toast('Este navegador no puede procesar audio.'); return; }
     // Crear y resumir el contexto dentro del gesto del usuario (clave en iOS Safari).
     mic.ctx = new Ctx();
-    if (mic.ctx.state === 'suspended') mic.ctx.resume();
+    if (mic.ctx.state === 'suspended') mic.ctx.resume().catch(() => {});
     try {
       mic.stream = await navigator.mediaDevices.getUserMedia({
         audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false }
@@ -449,6 +449,7 @@
       mic.analyser.fftSize = 2048;
       mic.analyser.smoothingTimeConstant = 0.1;
       source.connect(mic.analyser);
+      if (mic.ctx.state === 'suspended') { try { await mic.ctx.resume(); } catch (err) { /* reintenta en el gesto real */ } }
       mic.active = true;
       $('btn-mic').hidden = true;
       $('btn-mic-stop').hidden = false;
