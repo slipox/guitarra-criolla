@@ -435,13 +435,15 @@
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       toast('Este navegador no permite usar el micrófono.'); return;
     }
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) { toast('Este navegador no puede procesar audio.'); return; }
+    // Crear y resumir el contexto dentro del gesto del usuario (clave en iOS Safari).
+    mic.ctx = new Ctx();
+    if (mic.ctx.state === 'suspended') mic.ctx.resume();
     try {
       mic.stream = await navigator.mediaDevices.getUserMedia({
         audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false }
       });
-      const Ctx = window.AudioContext || window.webkitAudioContext;
-      mic.ctx = new Ctx();
-      if (mic.ctx.state === 'suspended') await mic.ctx.resume();
       const source = mic.ctx.createMediaStreamSource(mic.stream);
       mic.analyser = mic.ctx.createAnalyser();
       mic.analyser.fftSize = 2048;
@@ -454,6 +456,9 @@
       mic.last = 0;
       mic.raf = requestAnimationFrame(tunerLoop);
     } catch (err) {
+      if (mic.stream) mic.stream.getTracks().forEach((t) => t.stop());
+      if (mic.ctx) { mic.ctx.close().catch(() => {}); mic.ctx = null; }
+      mic.stream = null;
       toast('No se pudo activar el micrófono. Revisa los permisos del sitio.');
     }
   }

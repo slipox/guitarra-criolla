@@ -1,18 +1,18 @@
 @font-face {
   font-family: 'Barlow Condensed';
-  src: url('fonts/barlow-condensed-400.woff2?v=1795486852956') format('woff2');
+  src: url('fonts/barlow-condensed-400.woff2?v=1795487160269') format('woff2');
   font-weight: 400;
   font-display: swap;
 }
 @font-face {
   font-family: 'Barlow Condensed';
-  src: url('fonts/barlow-condensed-600.woff2?v=1795486852956') format('woff2');
+  src: url('fonts/barlow-condensed-600.woff2?v=1795487160269') format('woff2');
   font-weight: 600;
   font-display: swap;
 }
 @font-face {
   font-family: 'Barlow Condensed';
-  src: url('fonts/barlow-condensed-700.woff2?v=1795486852956') format('woff2');
+  src: url('fonts/barlow-condensed-700.woff2?v=1795487160269') format('woff2');
   font-weight: 700;
   font-display: swap;
 }
