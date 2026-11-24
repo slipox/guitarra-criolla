@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#16263F">
+  <meta name="description" content="Aprende guitarra criolla desde cero: niveles, repaso espaciado y afinador con micrófono. Funciona offline.">
+  <title>Guitarra Criolla · Escuela</title>
+  <link rel="manifest" href="manifest.webmanifest?v=1795353600000">
+  <link rel="icon" href="icon-192.png?v=1795353600000" sizes="192x192">
+  <link rel="apple-touch-icon" href="icon-192.png?v=1795353600000">
+  <link rel="stylesheet" href="styles.css?v=1795353600000">
+</head>
+<body>
+  <div class="wallet">
+    <header class="topstrip">
+      <div class="topstrip__brand">
+        <span class="topstrip__mark" aria-hidden="true"></span>
+        <span>GUITARRA <b>CRIOLLA</b></span>
+      </div>
+      <div class="topstrip__meta">
+        <span id="rank-label">PRINCIPIANTE</span>
+        <span class="topstrip__divider" aria-hidden="true"></span>
+        <span id="level-label">NIVEL 01</span>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- HOY -->
+      <section class="view" id="view-hoy" aria-label="Hoy" tabindex="-1">
+        <div class="hero-card">
+          <div class="hero-card__stripe" id="hero-stripe"></div>
+          <div class="hero-card__head">
+            <span class="hero-card__code" id="hero-code">NIVEL 01</span>
+            <span class="hero-card__seq" id="hero-seq">LECCIÓN 01 / 30</span>
+          </div>
+          <h1 class="hero-card__title" id="hero-title">La primera nota</h1>
+          <p class="hero-card__goal" id="hero-goal">Sentarte con la guitarra y sacar sonido limpio.</p>
+          <div class="progress" role="progressbar" aria-label="Progreso del curso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="course-progress">
+            <div class="progress__fill" id="course-fill"></div>
+          </div>
+          <p class="hero-card__meta" id="progress-text">0 de 30 lecciones</p>
+        </div>
+
+        <div class="action-grid">
+          <button class="action" id="btn-continue" type="button">
+            <span class="action__num">01</span><span class="action__label">CONTINUAR LECCIÓN</span>
+          </button>
+          <button class="action" id="btn-review" type="button">
+            <span class="action__num">02</span><span class="action__label">REPASAR <b id="due-badge">0</b></span>
+          </button>
+          <button class="action" id="btn-tune" type="button">
+            <span class="action__num">03</span><span class="action__label">AFINAR GUITARRA</span>
+          </button>
+        </div>
+
+        <section class="panel" aria-label="Tu ritmo">
+          <h2 class="section-title">Tu ritmo</h2>
+          <div class="mini-stats">
+            <div><b id="stat-lessons">0</b><span>LECCIONES</span></div>
+            <div><b id="stat-streak">0</b><span>RACHA DÍAS</span></div>
+            <div><b id="stat-due">0</b><span>PARA REPASAR</span></div>
+          </div>
+          <p class="tip" id="daily-tip"></p>
+        </section>
+      </section>
+
+      <!-- RUTA -->
+      <section class="view" id="view-ruta" aria-label="Ruta de niveles" tabindex="-1" hidden>
+        <div class="page-head">
+          <h1>Diez niveles</h1>
+          <p>De la primera nota a tu primera pieza. Cada nivel se abre al terminar el anterior.</p>
+        </div>
+        <div id="level-list"></div>
+      </section>
+
+      <!-- LECCIÓN -->
+      <section class="view" id="view-leccion" aria-label="Lección" tabindex="-1" hidden>
+        <button class="back" id="lesson-back" type="button">← VOLVER</button>
+        <div class="page-head">
+          <h1><span id="lesson-title">La postura</span> <small class="in-head" id="lesson-level">NIVEL 01</small></h1>
+          <p id="lesson-objective">Objetivo de la lección.</p>
+        </div>
+        <div class="lesson-card">
+          <div class="diagram-wrap" id="diagram-wrap" hidden>
+            <svg id="chord-svg" viewBox="0 0 120 140" role="img" aria-label="Diagrama de acorde"></svg>
+            <p class="diagram-caption" id="chord-name">Em · Mi menor</p>
+          </div>
+          <div class="lesson-body">
+            <h2 class="section-title">Qué hacer</h2>
+            <p class="lesson-practice" id="lesson-practice"></p>
+            <p class="lesson-hint" id="lesson-hint"></p>
+            <button class="btn" id="btn-play-chord" type="button" hidden>ESCUCHAR ACORDE</button>
+          </div>
+        </div>
+        <p class="feedback" id="lesson-feedback" role="status" aria-live="polite"></p>
+        <div class="grade-row">
+          <button class="btn btn--primary" id="lesson-easy" type="button">YA LA TENGO</button>
+          <button class="btn" id="lesson-hard" type="button">REPETIRLA DESPUÉS</button>
+        </div>
+      </section>
+
+      <!-- REPASO -->
+      <section class="view" id="view-repaso" aria-label="Repaso" tabindex="-1" hidden>
+        <div class="page-head">
+          <h1>Repaso</h1>
+          <p>Las lecciones que vuelven se muestran aquí. Repetir también es aprender.</p>
+        </div>
+        <div id="due-list"></div>
+        <p class="empty" id="review-empty" hidden>No hay nada pendiente hoy. Sigue con la lección siguiente.</p>
+        <div class="review-card" id="review-card" hidden>
+          <h2><span id="review-title">Lección</span> <small class="in-head" id="review-level">NIVEL 01</small></h2>
+          <p id="review-practice"></p>
+          <div class="grade-row">
+            <button class="btn btn--primary" id="review-easy" type="button">FÁCIL</button>
+            <button class="btn" id="review-hard" type="button">DIFÍCIL</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- AFINADOR -->
+      <section class="view" id="view-afinador" aria-label="Afinador" tabindex="-1" hidden>
+        <div class="page-head">
+          <h1>Afinador</h1>
+          <p>Afinación criolla: MI · LA · RE · SOL · SI · MI. Toca una cuerda y sigue la aguja.</p>
+        </div>
+
+        <div class="tuner-readout" id="tuner-readout">
+          <div class="tuner-target" id="tuner-target">SELECCIONA UNA CUERDA</div>
+          <div class="tuner-note" id="tuner-note">—</div>
+          <div class="tuner-hz" id="tuner-hz">0 Hz</div>
+          <div class="tuner-meter" aria-hidden="true">
+            <div class="tuner-meter__track"></div>
+            <div class="tuner-meter__center"></div>
+            <div class="tuner-meter__needle" id="tuner-needle"></div>
+          </div>
+          <div class="tuner-cents" id="tuner-cents">—</div>
+          <div class="tuner-advice" id="tuner-advice" role="status" aria-live="polite">Pulsa «ESCUCHAR» para oír la nota correcta.</div>
+        </div>
+
+        <div class="string-grid" id="tuner-strings"></div>
+        <button class="btn" id="btn-tune-all" type="button">ESCUCHAR LAS SEIS CUERDAS</button>
+
+        <div class="mic-row">
+          <button class="btn btn--primary" id="btn-mic" type="button">EMPEZAR A AFINAR</button>
+          <button class="btn" id="btn-mic-stop" type="button" hidden>DETENER MICRÓFONO</button>
+        </div>
+        <p class="mic-note" id="mic-note">El micrófono se usa solo en este dispositivo; no se graba ni se envía nada.</p>
+      </section>
+
+      <!-- REGISTRO -->
+      <section class="view" id="view-registro" aria-label="Registro" tabindex="-1" hidden>
+        <div class="page-head">
+          <h1>Registro</h1>
+          <p>Tu progreso vive en este celular. Exporta una copia antes de cambiar de equipo.</p>
+        </div>
+        <div class="stats-grid" id="stats-grid"></div>
+        <section class="panel" aria-label="Bitácora">
+          <h2 class="section-title">Bitácora de lecciones</h2>
+          <div id="log-table"></div>
+        </section>
+        <section class="panel" aria-label="Copia de seguridad">
+          <h2 class="section-title">Tus datos</h2>
+          <div class="backup__actions">
+            <button class="btn" id="export-data" type="button">EXPORTAR JSON</button>
+            <button class="btn" id="import-button" type="button">IMPORTAR JSON</button>
+            <button class="btn btn--primary" id="install-always" type="button">INSTALAR APP</button>
+            <button class="btn btn--danger" id="reset-progress" type="button">BORRAR PROGRESO</button>
+            <input id="import-file" type="file" accept="application/json" hidden>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <nav class="tabbar" aria-label="Navegación principal">
+      <button type="button" data-view="hoy" class="tabbar__tab is-active" aria-label="Hoy">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="3" width="16" height="14"/><path d="M7 3v14" stroke-dasharray="2 2"/></svg>HOY
+      </button>
+      <button type="button" data-view="ruta" class="tabbar__tab" aria-label="Ruta">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 15C5 5 15 5 18 15"/><circle cx="2" cy="15" r="1.5"/><circle cx="18" cy="15" r="1.5"/></svg>RUTA
+      </button>
+      <button type="button" data-view="leccion" class="tabbar__tab" aria-label="Lección">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 3h11l3 3v11H3z"/><path d="M6 9h8M6 13h8"/></svg>LECCIÓN
+      </button>
+      <button type="button" data-view="repaso" class="tabbar__tab" aria-label="Repaso">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M16 6a7 7 0 1 0 1 6"/><path d="M16 2v4h-4"/></svg>REPASO
+      </button>
+      <button type="button" data-view="afinador" class="tabbar__tab" aria-label="Afinador">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h3l2-6 4 12 2-6h3"/></svg>AFINADOR
+      </button>
+      <button type="button" data-view="registro" class="tabbar__tab" aria-label="Registro">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2" y="3" width="16" height="14"/><path d="M2 8h16M8 8v9"/></svg>REGISTRO
+      </button>
+    </nav>
+
+    <div class="install" id="install-banner" hidden>
+      <div>
+        <strong>Instalar la escuela</strong>
+        <span>Se abre como app y funciona sin internet.</span>
+      </div>
+      <button class="btn btn--primary" id="install-button" type="button">INSTALAR</button>
+      <button class="install__close" id="install-close" type="button" aria-label="Cerrar aviso">×</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="data.js?v=1795353600000"></script>
+  <script src="app.js?v=1795353600000"></script>
+</body>
+</html>
