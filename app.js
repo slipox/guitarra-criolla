@@ -299,6 +299,7 @@
     renderRuta();
     renderLeccion();
     renderRepaso();
+    renderAfinador();
     renderRegistro();
   }
 

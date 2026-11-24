@@ -1,6 +1,6 @@
 /* Guitarra Criolla — caché offline. Las URLs llevan versión para forzar la actualización. */
 const CACHE = 'guitarra-criolla-v1';
-const VERSION = '1795353600000';
+const VERSION = '1795486852956';
 const ASSETS = [
   './',
   './index.html',
